@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:trilhaapp/pages/dados_cadastrais.dart';
-import 'package:trilhaapp/pages/pagina1.dart';
-import 'package:trilhaapp/pages/pagina2.dart';
-import 'package:trilhaapp/pages/pagina3.dart';
+import 'package:trilhaapp/pages/card_page.dart';
+import 'package:trilhaapp/pages/image_assets.dart';
+import 'package:trilhaapp/pages/tarefa_page.dart';
+import 'package:trilhaapp/shared/widgets/custom_drawer.dart';
+
+import 'list_view_horizontal.dart';
+import 'list_view_v.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -21,54 +24,7 @@ class _MainPageState extends State<MainPage> {
         appBar: AppBar(
           title: const Text("Main Page"),
         ),
-        drawer: Drawer(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InkWell(
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      width: double.infinity,
-                      child: const Text('Dados Cadastrais')),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const DadosCadastraisPage(
-                                  texto: 'Meus Dados',
-                                  dados: ['Nome', 'Endereço'],
-                                )));
-                  },
-                ),
-                const Divider(),
-                const SizedBox(
-                  height: 10,
-                ),
-                InkWell(
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      width: double.infinity,
-                      child: const Text('Termos de uso e privacidade')),
-                  onTap: () {},
-                ),
-                const Divider(),
-                const SizedBox(
-                  height: 10,
-                ),
-                InkWell(
-                  child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 5),
-                      width: double.infinity,
-                      child: const Text('Configurações')),
-                  onTap: () {},
-                ),
-              ],
-            ),
-          ),
-        ),
+        drawer: const CustomDrawer(),
         body: Column(
           children: [
             Expanded(
@@ -79,10 +35,17 @@ class _MainPageState extends State<MainPage> {
                     posicaoPagina = value;
                   });
                 },
-                children: const [Pagina1Page(), Pagina2Page(), Pagina3Page()],
+                children: const [
+                  CardPage(),
+                  ImageAssetsPage(),
+                  ListViewPage(),
+                  ListViewHorizontal(),
+                  TarefaPage()
+                ],
               ),
             ),
             BottomNavigationBar(
+                type: BottomNavigationBarType.fixed,
                 onTap: (value) {
                   controller.jumpToPage(value);
                 },
@@ -92,7 +55,11 @@ class _MainPageState extends State<MainPage> {
                       label: 'Pag1', icon: Icon(Icons.home)),
                   BottomNavigationBarItem(label: 'Pag2', icon: Icon(Icons.add)),
                   BottomNavigationBarItem(
-                      label: 'Pag3', icon: Icon(Icons.person))
+                      label: 'Pag3', icon: Icon(Icons.person)),
+                  BottomNavigationBarItem(
+                      label: 'Pag4', icon: Icon(Icons.image)),
+                  BottomNavigationBarItem(
+                      label: 'Tarefas', icon: Icon(Icons.list)),
                 ])
           ],
         ),
