@@ -1,6 +1,9 @@
 # Calculadora IMC
 
-A new Flutter project.
+[x] Criar classe IMC peso e altura
+[x] Ler dados no app
+[x] Calcular IMC
+[x] Exibir os dados em uma lista
 
 ## Getting Started
 
