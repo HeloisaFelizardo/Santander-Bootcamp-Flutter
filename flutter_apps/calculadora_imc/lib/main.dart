@@ -37,56 +37,58 @@ class _IMCCalculatorScreenState extends State<IMCCalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('IMC Calculator'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            TextFormField(
-              controller: nameController,
-              decoration: const InputDecoration(labelText: 'Nome'),
-            ),
-            TextFormField(
-              controller: weightController,
-              decoration: const InputDecoration(labelText: 'Peso (kg)'),
-              keyboardType: TextInputType.number,
-            ),
-            TextFormField(
-              controller: heightController,
-              decoration: const InputDecoration(labelText: 'Altura (m)'),
-              keyboardType: TextInputType.number,
-            ),
-            ElevatedButton(
-              onPressed: calculateIMC,
-              child: const Text('Calcular IMC'),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: measurements.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text('Nome: ${measurements[index].name}'),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Peso: ${measurements[index].weight} kg'),
-                        Text('Altura: ${measurements[index].height} m'),
-                        Text('IMC: ${measurements[index].calculateIMC()}'),
-                        Text(
-                            'Classificação: ${measurements[index].classification}'),
-                        Text(
-                            'Data da medição: ${dateFormatter.format(measurements[index].date)}'),
-                      ],
-                    ),
-                  );
-                },
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('IMC Calculator'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: <Widget>[
+              TextFormField(
+                controller: nameController,
+                decoration: const InputDecoration(labelText: 'Nome'),
               ),
-            ),
-          ],
+              TextFormField(
+                controller: weightController,
+                decoration: const InputDecoration(labelText: 'Peso (kg)'),
+                keyboardType: TextInputType.number,
+              ),
+              TextFormField(
+                controller: heightController,
+                decoration: const InputDecoration(labelText: 'Altura (m)'),
+                keyboardType: TextInputType.number,
+              ),
+              ElevatedButton(
+                onPressed: calculateIMC,
+                child: const Text('Calcular IMC'),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: measurements.length,
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text('Nome: ${measurements[index].name}'),
+                      subtitle: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Peso: ${measurements[index].weight} kg'),
+                          Text('Altura: ${measurements[index].height} m'),
+                          Text('IMC: ${measurements[index].calculateIMC()}'),
+                          Text(
+                              'Classificação: ${measurements[index].classification}'),
+                          Text(
+                              'Data da medição: ${dateFormatter.format(measurements[index].date)}'),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

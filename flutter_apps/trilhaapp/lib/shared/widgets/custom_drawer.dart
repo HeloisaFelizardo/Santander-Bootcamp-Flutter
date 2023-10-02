@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/pages/configuracoes/configuracoes_hive_page.dart';
+import 'package:trilhaapp/pages/numeros_alelatorios/numeros_aleatorios_hive_page.dart';
 
-import '../../pages/dados_cadastrais.dart';
+import '../../pages/dados_cadastrais/dados_cadastrais_hive.dart';
 import '../../pages/login_page.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -68,7 +70,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const DadosCadastraisPage()));
+                      builder: (context) => const DadosCadastraisHivePage()));
             },
           ),
           const Divider(),
@@ -130,6 +132,32 @@ class CustomDrawer extends StatelessWidget {
                 width: double.infinity,
                 child: const Row(
                   children: [
+                    Icon(Icons.numbers),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text('Gerador de números'),
+                  ],
+                )),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext) => NumerosAleatoriosHivePage()));
+            },
+          ),
+          const Divider(),
+          const SizedBox(
+            height: 10,
+          ),
+          InkWell(
+            child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                width: double.infinity,
+                child: const Row(
+                  children: [
                     Icon(Icons.settings),
                     SizedBox(
                       width: 5,
@@ -137,7 +165,13 @@ class CustomDrawer extends StatelessWidget {
                     Text('Configurações'),
                   ],
                 )),
-            onTap: () {},
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext) => ConfiguracoesHivePage()));
+            },
           ),
           const Divider(),
           const SizedBox(
