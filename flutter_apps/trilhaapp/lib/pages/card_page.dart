@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/model/card_detail.dart';
+import 'package:trilhaapp/pages/card_detail.dart';
 import 'package:trilhaapp/repositories/card_detail_repository.dart';
-
-import '../model/card_detail.dart';
-import 'card_detail.dart';
 
 class CardPage extends StatefulWidget {
   const CardPage({super.key});
@@ -81,7 +80,15 @@ class _CardPageState extends State<CardPage> {
                                 width: double.infinity,
                                 alignment: Alignment.centerRight,
                                 child: TextButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CardDetailPage(
+                                                    cardDetail: cardDetail!,
+                                                  )));
+                                    },
                                     child: const Text(
                                       'Ler Mais',
                                       style: TextStyle(
