@@ -1,3 +1,8 @@
+import 'package:calculadora_imc/data/database_helper.dart';
+import 'package:calculadora_imc/model/measurement.dart';
+import 'package:calculadora_imc/screens/imc_calculator_app.dart';
+import 'package:calculadora_imc/screens/imc_calculator_screen.dart';
+import 'package:calculadora_imc/utils/imc_classification.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -5,30 +10,7 @@ void main() {
   runApp(const IMCCalculatorApp());
 }
 
-class IMCCalculatorApp extends StatelessWidget {
-  const IMCCalculatorApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'IMC Calculator',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
-      home: const IMCCalculatorScreen(),
-    );
-  }
-}
-
-class IMCCalculatorScreen extends StatefulWidget {
-  const IMCCalculatorScreen({super.key});
-
-  @override
-  _IMCCalculatorScreenState createState() => _IMCCalculatorScreenState();
-}
-
-class _IMCCalculatorScreenState extends State<IMCCalculatorScreen> {
+class IMCCalculatorScreenState extends State<IMCCalculatorScreen> {
   TextEditingController nameController = TextEditingController();
   TextEditingController weightController = TextEditingController();
   TextEditingController heightController = TextEditingController();
@@ -94,7 +76,7 @@ class _IMCCalculatorScreenState extends State<IMCCalculatorScreen> {
     );
   }
 
-  void calculateIMC() {
+  void calculateIMC() async {
     String name = nameController.text;
     double weight =
         double.tryParse(weightController.text.replaceAll(',', '.')) ?? 0.0;
@@ -115,37 +97,15 @@ class _IMCCalculatorScreenState extends State<IMCCalculatorScreen> {
       weightController.clear();
       heightController.clear();
     });
-  }
 
-  String getIMCClassification(double imc) {
-    if (imc < 18.5) {
-      return "Abaixo do peso";
-    } else if (imc < 24.9) {
-      return "Peso normal";
-    } else if (imc < 29.9) {
-      return "Sobrepeso";
-    } else if (imc < 34.9) {
-      return "Obesidade Grau 1";
-    } else if (imc < 39.9) {
-      return "Obesidade Grau 2";
-    } else {
-      return "Obesidade Grau 3";
-    }
-  }
-}
+    // Gravar medição no SQLite
+    final measurement =
+        Measurement(name, DateTime.now(), weight, height, imc, classification);
+    await DatabaseHelper().insertMeasurement(measurement);
 
-class Measurement {
-  final String name;
-  final DateTime date;
-  final double weight;
-  final double height;
-  final double imc;
-  final String classification;
-
-  Measurement(this.name, this.date, this.weight, this.height, this.imc,
-      this.classification);
-
-  String calculateIMC() {
-    return imc.toStringAsFixed(2);
+    // Limpar campos
+    nameController.clear();
+    weightController.clear();
+    heightController.clear();
   }
 }
