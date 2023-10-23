@@ -1,6 +1,8 @@
 # Calculadora IMC
 
-## Criar classe IMC (Peso / Altura)​
+## Checklist do Desafio
+
+- Criar classe IMC (Peso / Altura)​
 
 - Altura ler em tela de Configurações​
 
