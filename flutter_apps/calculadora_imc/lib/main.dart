@@ -2,6 +2,7 @@ import 'package:calculadora_imc/data/database_helper.dart';
 import 'package:calculadora_imc/model/measurement.dart';
 import 'package:calculadora_imc/screens/imc_calculator_app.dart';
 import 'package:calculadora_imc/screens/imc_calculator_screen.dart';
+import 'package:calculadora_imc/screens/measurement_list_screen.dart';
 import 'package:calculadora_imc/utils/imc_classification.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -23,6 +24,28 @@ class IMCCalculatorScreenState extends State<IMCCalculatorScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('IMC Calculator'),
+          actions: [
+            PopupMenuButton<String>(
+              onSelected: (String choice) {
+                if (choice == 'visualizar_medicoes') {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const MeasurementListScreen(),
+                    ),
+                  );
+                }
+              },
+              itemBuilder: (BuildContext context) {
+                return <PopupMenuEntry<String>>[
+                  const PopupMenuItem<String>(
+                    value: 'visualizar_medicoes',
+                    child: Text('Visualizar Medições'),
+                  ),
+                  // Outras opções de menu, se desejar
+                ];
+              },
+            ),
+          ],
         ),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
