@@ -1,9 +1,16 @@
 # Calculadora IMC
 
-[x] Criar classe IMC peso e altura
-[x] Ler dados no app
-[x] Calcular IMC
-[x] Exibir os dados em uma lista
+## Criar classe IMC (Peso / Altura)​
+
+- Altura ler em tela de Configurações​
+
+- Ler dados no app​
+
+- Calcular IMC ​
+
+- Gravar dados no Hive ou SQLite​
+
+- Exibir em uma lista
 
 ## Getting Started
 
